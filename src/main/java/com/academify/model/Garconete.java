@@ -1,10 +1,6 @@
 package com.academify.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 
 
 import javax.validation.constraints.*;
@@ -46,6 +42,10 @@ public class Garconete {
 
     @NotNull(message = "Salário é obrigatório")
     private Double salario;
+
+    @ManyToOne
+    @JoinColumn(name = "bar_id")
+    private Bar bar;
 
 
     public Long getId() {
@@ -118,5 +118,13 @@ public class Garconete {
 
     public void setSalario(Double salario) {
         this.salario = salario;
+    }
+
+    public Bar getBar() {
+        return bar;
+    }
+
+    public void setBar(Bar bar) {
+        this.bar = bar;
     }
 }

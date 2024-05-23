@@ -75,6 +75,11 @@ public class BarService {
         if (bar.getNome() == null || bar.getNome().length() < 3 || bar.getNome().length() > 50) {
             throw new Exception("Nome deve ter entre 3 e 50 caracteres.");
         }
+
+        if (bar.getTelefone() == null || bar.getTelefone().length() < 10 || bar.getTelefone().length() > 15) {
+            throw new Exception("Telefone é obrigatório.");
+        }
+
         if (isNew) {
             if (bar.getCnpj() == null || !CNPJValidator.isValidCNPJ(bar.getCnpj())) {
                 throw new Exception("CNPJ deve estar no formato 00.000.000/0000-00 e é obrigatório.");
@@ -82,32 +87,32 @@ public class BarService {
             if (barRepository.existsByCnpj(bar.getCnpj())) {
                 throw new Exception("CNPJ já cadastrado.");
             }
+
         }
-        if (bar.getRazaoSocial() == null) {
+        if (bar.getRazaoSocial() == null || bar.getRazaoSocial().length() < 8 || bar.getRazaoSocial().length() > 50) {
             throw new Exception("Razão Social é obrigatória.");
         }
-        if (bar.getRua() == null) {
+        if (bar.getRua() == null || bar.getRua().length() < 2 || bar.getRua().length() > 50) {
             throw new Exception("Rua é obrigatória.");
         }
-        if (bar.getNumero() == null) {
-            throw new Exception("Número é obrigatório.");
+        if (bar.getNumero() == null || bar.getNumero().isEmpty() || bar.getNumero().length() < 2 || bar.getNumero().length() > 5) {
+            throw new Exception("Numero é obrigatório.");
         }
-        if (bar.getBairro() == null) {
+        if (bar.getBairro() == null || bar.getBairro().isEmpty()) {
             throw new Exception("Bairro é obrigatório.");
         }
-        if (bar.getCidade() == null) {
+        if (bar.getCidade() == null || bar.getCidade().isEmpty()) {
             throw new Exception("Cidade é obrigatória.");
         }
         if (bar.getEstado() == null || !bar.getEstado().matches("AC|AL|AP|AM|BA|CE|DF|ES|GO|MA|MT|MS|MG|PA|PB|PR|PE|PI|RJ|RN|RS|RO|RR|SC|SP|SE|TO")) {
             throw new Exception("Estado deve ser uma das opções válidas " +
                     "AC|AL|AP|AM|BA|CE|DF|ES|GO|MA|MT|MS|MG|PA|PB|PR|PE|PI|RJ|RN|RS|RO|RR|SC|SP|SE|TO.");
         }
-        if (bar.getCep() == null) {
+        if ((bar.getCep() == null) || (bar.getCep().length() < 8) || (bar.getCep().length() > 8)) {
             throw new Exception("CEP é obrigatório.");
         }
-        if (bar.getTelefone() == null) {
-            throw new Exception("Telefone é obrigatório.");
-        }
+
+
         if (bar.getLotacaoMaxima() == null || bar.getLotacaoMaxima() < 1 || bar.getLotacaoMaxima() > 999) {
             throw new Exception("Lotação Máxima deve ser entre 1 e 999.");
         }

@@ -32,11 +32,11 @@ public class BarController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Bar> getBarById(@PathVariable Long id) {
+    public ResponseEntity<?> getBarById(@PathVariable Long id) {
         try {
             return ResponseEntity.ok(barService.findById(id));
         } catch (Exception e) {
-            return ResponseEntity.notFound().build();
+            return ResponseEntity.badRequest().body(e.getMessage());
         }
     }
 
