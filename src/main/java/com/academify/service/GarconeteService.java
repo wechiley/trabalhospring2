@@ -89,14 +89,14 @@ public class GarconeteService {
         if (garconete.getRg() == null) {
             throw new Exception("RG é obrigatório.");
         }
-        if (garconete.getTelefone() == null) {
+        if (garconete.getTelefone() == null || garconete.getTelefone().length() < 10 || garconete.getTelefone().length() > 15) {
             throw new Exception("Telefone é obrigatório.");
         }
         if (garconete.getDataContratacao() == null || garconete.getDataContratacao().after(new java.util.Date())) {
             throw new Exception("Data de contratação inválida.");
         }
         if (garconete.getStatusTrabalho() == null || !garconete.getStatusTrabalho().matches("ativo|licença-maternidade|férias|desligado")) {
-            throw new Exception("Status de trabalho inválido.");
+            throw new Exception("Status de trabalho inválido, deve ser uma das opções válidas = ativo|licença-maternidade|férias|desligado");
         }
         if (garconete.getSalario() == null) {
             throw new Exception("Salário é obrigatório.");
